@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'client_form',
-]
+    'rangefilter',
+    'admin_totals',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

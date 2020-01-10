@@ -1,6 +1,9 @@
 from django.contrib import admin
-from .models import Patient, Doctor, Product, Register
-
+from admin_totals.admin import ModelAdminTotals
+from .models import Patient, Doctor, Product, Record
+from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
+from django.db.models import Sum, Avg
+from django.db.models.functions import Coalesce
 """
 Inlines
 """
@@ -10,21 +13,25 @@ Register models
 """
 @admin.register(Patient)
 class PatientAdmin(admin.ModelAdmin):
-    fields = ('cedula', 'nombre', 'edad','sexo','procedencia','origen', 'derivacion', 'tratamiento')
-    list_display = ('nombre', 'edad', 'sexo', 'derivacion', 'tratamiento',)
+    fields = ('cedula', 'nombre', 'edad','sexo','procedencia','origen', 'derivacion','diagnostico',)
+    list_display = ('nombre', 'edad', 'sexo', 'derivacion','diagnostico' ,)
+    list_filter = ('edad', 'sexo','diagnostico')
+    search_fields = ('cedula', 'nombre','derivacion__nombre' )
 
 @admin.register(Doctor)
 class DoctorAdmin(admin.ModelAdmin):
-    fields = ('nombre',)
+    fields = ('nombre','especialidad')
+    list_display = ('nombre','especialidad')
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    fields = ('nombre', 'precio',)
-    list_display = ('nombre', 'precio',)
+    fields = ('tratamiento', 'precio',)
+    list_display = ('tratamiento', 'precio',)
 
-@admin.register(Register)
-class RegisterAdmin(admin.ModelAdmin):
-    fields = ('fecha','paciente',)
+@admin.register(Record)
+class RecordAdmin(ModelAdminTotals):
+   
+    fields = ('fecha','paciente','product')
   #  inlines = [PatientInLine]
     #readonly_fields = ('paciente__nombre', 'paciente__edad',)
     def get_paciente(self,obj):
@@ -36,7 +43,12 @@ class RegisterAdmin(admin.ModelAdmin):
     def get_paciente_derivacion(self,obj):
         return obj.paciente.derivacion
     def get_paciente_tratamiento(self,obj):
-        return obj.paciente.tratamiento
+        return obj.product.tratamiento
     def get_paciente_money(self,obj):
-        return obj.paciente.tratamiento.precio
-    list_display = ('fecha', 'get_paciente', 'get_paciente_edad','get_paciente_sexo','get_paciente_tratamiento','get_paciente_money')
+        return obj.product.precio
+    
+    list_display = ('fecha', 'paciente', 'get_paciente_edad','get_paciente_sexo','get_paciente_tratamiento','get_paciente_money')
+    list_filter = (('fecha',DateRangeFilter),'paciente__edad','paciente__sexo','product__tratamiento')
+    search_fields = ('paciente__nombre','paciente__edad','paciente__sexo','product__tratamiento')
+"""
+"""
