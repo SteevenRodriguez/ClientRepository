@@ -32,8 +32,6 @@ class ProductAdmin(admin.ModelAdmin):
 class RecordAdmin(ModelAdminTotals):
    
     fields = ('fecha','paciente','product')
-  #  inlines = [PatientInLine]
-    #readonly_fields = ('paciente__nombre', 'paciente__edad',)
     def get_paciente(self,obj):
         return obj.paciente.nombre
     def get_paciente_edad(self,obj):
