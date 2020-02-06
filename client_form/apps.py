@@ -5,4 +5,5 @@ class SuitConfig(DjangoSuitConfig):
     layout = 'horizontal'
 
 class ClientFormConfig(AppConfig):
-    name = 'RegistrRegistro de Ventas'
+    name = 'client_form'
+    verbose_name = 'Registro de Ventas'

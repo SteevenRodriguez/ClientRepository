@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     #'client_form.apps.SuitConfig',
+    'admin_interface',
+    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'client_form',
     'rangefilter',
-    'admin_totals',
+    'import_export',
     ]
 
 MIDDLEWARE = [

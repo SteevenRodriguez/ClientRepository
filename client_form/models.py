@@ -29,20 +29,26 @@ class Patient(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+    class Meta:
+        verbose_name = "Paciente"
 class Product(models.Model):
     tratamiento = models.CharField(max_length=30)
     precio = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):
         return self.tratamiento
-
+    class Meta:
+        verbose_name = "Servicio"
 class Doctor(models.Model):
     nombre = models.CharField(max_length=30)
     especialidad = models.CharField(max_length=30)
     
     def __str__(self):
         return self.nombre
-
+    class Meta:
+        verbose_name = "Doctor"
+        verbose_name_plural = "Doctores"
 
 
 class Record(models.Model):
@@ -52,4 +58,7 @@ class Record(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.fecha.strftime('%b %d %Y %H:%M:%S')
+        return self.fecha.strftime('%b %d %Y')
+    class Meta:
+        verbose_name = "Registro"
+        verbose_name_plural = "Registros"
