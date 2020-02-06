@@ -18,7 +18,7 @@ django-flat-theme==1.1.4
 django-grappelli==2.13.2
 django-import-export==2.0.1
 django-suit==2.0a1
-djangorestframework==3.6.4
+djangorestframework==3.9.1
 et-xmlfile==1.0.1
 Flask==1.1.1
 gevent==1.5a2
