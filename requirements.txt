@@ -7,7 +7,7 @@ Click==7.0
 ConfigArgParse==0.15.1
 defusedxml==0.6.0
 diff-match-patch==20181111
-Django==3.0
+Django==3.0.3
 django-admin-interface==0.12.0
 django-admin-rangefilter==0.5.3
 django-colorfield==0.1.15
